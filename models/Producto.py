@@ -3,7 +3,6 @@ from utils.validators import (
     validar_stock
 )
 
-
 class Producto:
 
     def __init__(self, nombre, precio, stock):
@@ -56,62 +55,3 @@ class Producto:
         )
 
 
-class DescuentoMixin:
-
-    def aplicar_descuento(
-            self,
-            precio,
-            porcentaje):
-        return precio * (
-            1 - porcentaje / 100
-        )
-
-
-class Electronico(
-    DescuentoMixin,
-    Producto
-):
-
-    def __init__(
-            self,
-            nombre,
-            precio,
-            stock,
-            garantia):
-
-        super().__init__(
-            nombre,
-            precio,
-            stock
-        )
-
-        self.garantia = garantia
-
-    def calcular_precio_final(self):
-        return self.aplicar_descuento(
-            self.precio,
-            10
-        )
-
-
-class Libro(
-    Producto
-):
-
-    def __init__(
-            self,
-            nombre,
-            precio,
-            stock,
-            autor):
-
-        super().__init__(
-            nombre,
-            precio,
-            stock
-        )
-
-        self.autor = autor
-
-    def calcular_precio_final(self):
-        return self.precio * 1.04
