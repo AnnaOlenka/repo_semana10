@@ -50,8 +50,9 @@ class Producto:
         )
 
     def __del__(self):
-        print(
-            f"Producto {self.nombre} eliminado"
-        )
+        if hasattr(self, '_nombre'):
+            print(
+                f"Producto {self._nombre} eliminado"
+            )
 
 

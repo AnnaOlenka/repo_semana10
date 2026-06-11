@@ -13,3 +13,7 @@ def validar_stock(stock):
         raise ValidationError(
             "El stock no puede ser negativo."
         )
+
+
+def formatear_moneda(valor):
+    return f"S/ {valor:.2f}"
