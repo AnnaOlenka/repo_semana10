@@ -51,9 +51,10 @@ class Producto:
         )
 
     def __del__(self):
-        print(
-            f"Producto {self.nombre} eliminado"
-        )
+        if hasattr(self, '_nombre'):
+            print(
+                f"Producto {self._nombre} eliminado"
+            )
 
 
 class DescuentoMixin:
@@ -87,10 +88,29 @@ class Electronico(
 
         self.garantia = garantia
 
+    @property
+    def garantia(self):
+        return self._garantia
+
+    @garantia.setter
+    def garantia(self, valor):
+        if valor <= 0:
+            raise ValueError(
+                "La garantía debe ser mayor que cero."
+            )
+        self._garantia = valor
+
     def calcular_precio_final(self):
         return self.aplicar_descuento(
             self.precio,
             10
+        )
+
+    def __str__(self):
+        return (
+            f"[Electrónico] {self.nombre} | "
+            f"S/ {self.calcular_precio_final():.2f} "
+            f"(Garantía: {self.garantia} meses)"
         )
 
 
@@ -113,5 +133,24 @@ class Libro(
 
         self.autor = autor
 
+    @property
+    def autor(self):
+        return self._autor
+
+    @autor.setter
+    def autor(self, valor):
+        if not valor.strip():
+            raise ValueError(
+                "El autor no puede estar vacío."
+            )
+        self._autor = valor
+
     def calcular_precio_final(self):
         return self.precio * 1.04
+
+    def __str__(self):
+        return (
+            f"[Libro] {self.nombre} | "
+            f"S/ {self.calcular_precio_final():.2f} "
+            f"(Autor: {self.autor})"
+        )

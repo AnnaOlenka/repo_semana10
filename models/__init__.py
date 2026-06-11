@@ -1,6 +1,1 @@
-from .producto import (
-    Producto,
-    Electronico,
-    Libro,
-    DescuentoMixin
-)
+from .producto import Producto, Electronico, Libro, DescuentoMixin
